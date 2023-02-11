@@ -31,12 +31,12 @@ def like(request):
         post = get_object_or_404(Social, id=id)
         if post.likes.filter(id=request.user.id).exists():
             post.likes.remove(request.user)
-            post.like_count += 1
+            post.like_count -= 1
             result = post.like_count
             post.save()
         else:
             post.likes.add(request.user)
-            post.like_count -= 1
+            post.like_count += 1
             result = post.like_count
             post.save()
 
